@@ -12,7 +12,7 @@ function App() {
       {/* <NavBar/> */}
       <Route path="/" exact component={LandPage}/>
       <Route path="/countries" exact component={Home}/>
-      <Route path="/countries/:name" component={CountryDetail}/>
+      <Route path="/countries/:id" component={CountryDetail}/>
       <Route path="/activiy" component={Activity}/>
     </div>
   );

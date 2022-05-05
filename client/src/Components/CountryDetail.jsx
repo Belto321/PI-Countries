@@ -4,13 +4,14 @@ import {getCountryDetail} from '../Redux/index'
 import { useParams } from 'react-router-dom'
 
 const CountryDetail = (props) =>{
-    const {name} = useParams()
+    const {id} = useParams()
     const dispatch = useDispatch()
-    const country = useSelector(store => store.countryDetail)
-
+    const country = useSelector(state => state.countryDetail)
+    console.log(id)
     useEffect(()=>{
-        dispatch(getCountryDetail(name))
-    },[dispatch, name])
+        
+        dispatch(getCountryDetail(id))
+    },[dispatch, id])
     return (
         <div>
             <div>
