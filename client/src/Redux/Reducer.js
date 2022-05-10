@@ -1,8 +1,9 @@
-import { GET_COUNTRIES, GET_COUNTRY_DETAIL, ADD_ACTIVITY, GET_NAME_COUNTRIES } from './ActionsTypes';
+import { GET_COUNTRIES, GET_COUNTRY_DETAIL, GET_ACTIVITY, GET_NAME_COUNTRIES } from './ActionsTypes';
 
 const initialState = {
     countries: [],
-    countryDetail: {}
+    countryDetail: {},
+    activities: []
 }
 
 export default function reducer(state = initialState, { type, payload }) {
@@ -22,6 +23,11 @@ export default function reducer(state = initialState, { type, payload }) {
               ...state,
               countryDetail: payload
           };
+      case GET_ACTIVITY:
+        return {
+          ...state,
+          activities: payload
+        }
       default:
           return state
     }

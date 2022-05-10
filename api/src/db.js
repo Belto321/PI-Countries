@@ -34,7 +34,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 // modelcountry(sequelize);
 // modelturist_activity(sequelize)
-const { Country, Turist_activity, Op } = sequelize.models;
+const { Country, Turist_activity} = sequelize.models;
 
 
 // Aca vendrian las relaciones

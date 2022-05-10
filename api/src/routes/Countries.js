@@ -13,6 +13,7 @@ router.get('/', async(req, res)=> {
                 name: {[Op.iLike]: '%' + name + '%' }
             }
         })
+        if(!country) return res.send("Country not found")
         res.json(country)
      }catch(err){
         res.status(404).send(err)
@@ -25,9 +26,10 @@ router.get('/', async(req, res)=> {
                     where:{
                         continet: Cfilter,
                     },
-                // include: Turist_activity:{
-                //     where: Afilter
-                // },
+                    include: [{
+                        model: Turist_activity,
+                        where: { name: Afilter }, 
+                      }],
                     limit: 10,
                     offset: page,
                     order:[["name", Norder]]
@@ -61,9 +63,10 @@ router.get('/', async(req, res)=> {
         else if(Afilter){
             try {
                 const countries = await Country.findAll({
-                      // include: Turist_activity({
-                //     where: Afilter
-                // })
+                    include: [{
+                        model: Turist_activity,
+                        where: { name: Afilter }, 
+                      }],
                 limit: 10,
                 offset: page,
                 order:[["name", Norder]]
@@ -94,9 +97,10 @@ router.get('/', async(req, res)=> {
                     where:{
                         continet: Cfilter,
                     },
-                // include: Turist_activity({
-                //     where: Afilter
-                // })
+                    include: [{
+                        model: Turist_activity,
+                        where: { name: Afilter }, 
+                      }],
                     limit: 10,
                     offset: page,
                     order:[["population", Porder]]
@@ -130,9 +134,10 @@ router.get('/', async(req, res)=> {
         else if(Afilter){
             try {
                 const countries = await Country.findAll({
-                      // include: Turist_activity({
-                //     where: Afilter
-                // })
+                    include: [{
+                        model: Turist_activity,
+                        where: { name: Afilter }, 
+                      }],
                 limit: 10,
                 offset: page,
                 order:[["population", Porder]]
@@ -186,7 +191,7 @@ router.get('/:code', async (req, res) => {
     const { code } = req.params;
     try {
         const countries = await Country.findByPk(code, {
-            includes: Turist_activity,
+            include: Turist_activity,
         })
         res.json(countries)
     } catch (err) {

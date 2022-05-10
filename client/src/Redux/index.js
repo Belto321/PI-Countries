@@ -1,9 +1,9 @@
-import { GET_COUNTRIES, GET_COUNTRY_DETAIL, ADD_ACTIVITY, GET_NAME_COUNTRIES } from './ActionsTypes';
+import { GET_COUNTRIES, GET_COUNTRY_DETAIL, GET_ACTIVITY, GET_NAME_COUNTRIES } from './ActionsTypes';
 import axios from 'axios'
 
-export function getCountries( page, Norder, Porder, Cfilter){
+export function getCountries( page, Norder, Porder, Cfilter, Afilter){
     return dispatch => {
-        return axios.get(`http://localhost:3001/countries?page=${page}&Norder=${Norder}&Porder=${Porder}&Cfilter=${Cfilter}`)
+        return axios.get(`http://localhost:3001/countries?page=${page}&Norder=${Norder}&Porder=${Porder}&Cfilter=${Cfilter}&Afilter=${Afilter}`)
      
             .then(res => dispatch({type: GET_COUNTRIES, payload: res.data}))
             .catch()
@@ -27,9 +27,10 @@ export function getCountryDetail(id){
     }
 };
 
-export function addActivity(payload){
+export function getActivity(){
     return dispatch => {
-        return axios.post(`http://localhost:3001/activity`, payload)
+        return axios.get(`http://localhost:3001/activity`)
+        .then(res => dispatch({type: GET_ACTIVITY, payload: res.data}))
             .catch()
     }
 }

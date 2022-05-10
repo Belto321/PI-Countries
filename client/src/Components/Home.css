@@ -1,0 +1,87 @@
+
+
+.containerContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);   
+    grid-gap: 2rem;
+    margin-top: 4rem;
+}
+
+.cardContainer {
+    background-color: lightblue;
+  box-shadow: 2px 2px 10px 2px lightblue;
+text-align: center;
+}
+
+.Htitle{
+    display: flex;
+    align-items: flex-start;
+}
+
+.RenderButton{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.filterContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: space-around;
+    padding: 1.5rem;
+    height: 80px;
+}
+
+.navBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 0rem;
+    margin-bottom: 2rem;
+    box-shadow: 2px 2px 10px 2px lightblue;
+    padding: 1.5rem;
+}
+
+.Hselect{
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.link {
+    text-decoration: none;
+    color: black;
+}
+
+.prevNext{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400;
+    margin: 8px;
+    margin-bottom: 12px;
+}
+
+.notFound{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:red;
+    width: 100%;
+    margin-left: 14.5rem;
+    margin-bottom: 4rem;
+}

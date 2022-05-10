@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { useDispatch} from 'react-redux';
 import {getNameCountries} from '../Redux/index.js'
-
+import './searchBar.css'
 
 const SearchBar = () => {
     const dispatch = useDispatch()
@@ -14,17 +14,14 @@ const SearchBar = () => {
     function handleChange(e){
         setName(e.target.value)
           }
-        // useEffect(() => {
-        //     dispatch(getNameCountries(name))
-        // },[dispatch, name])    
          
     return (
-        <div>
+        <div className='searchBar'>
         
-          <button onClick={() => nameSearch()}>
+          <button className="button" onClick={() => nameSearch()}>
               Search Country
           </button>
-          <input type="text" 
+          <input className="input" type="text" 
           placeholder="Search..."
            onChange={(e) => handleChange(e)}/>
         

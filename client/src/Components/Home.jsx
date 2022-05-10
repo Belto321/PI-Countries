@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import {getCountries} from '../Redux/index.js'
+import {getCountries, getActivity} from '../Redux/index.js'
 import SearchBar from "./Serchbar";
 import { Link } from "react-router-dom";
+import './Home.css'
 
 
 const Home = () => {
     const country = useSelector( store => store.countries)
-
+    const activities = useSelector(store => store.activities)
     const dispatch = useDispatch()
 
     const [page, setPage] = useState(0)
@@ -17,6 +18,8 @@ const Home = () => {
     const [Porder, setPorder] = useState("")
 
     const [Cfilter, setCfilter] = useState("")
+
+    const [Afilter, setAfilter] = useState("")
 
     const prev = ()=> {
         setPage(page - 10)
@@ -43,36 +46,45 @@ const Home = () => {
         setCfilter(e.target.value)
     }
 
+    const afilterHandler = (e) => {
+        e.preventDefault();
+        setAfilter(e.target.value)
+    }
+
     const reRender = () => {
-        dispatch(getCountries(page, Norder, Porder, Cfilter))
+        dispatch(getCountries(page, Norder, Porder, Cfilter, Afilter))
     }
 
     useEffect(()=>{
-        dispatch(getCountries(page, Norder, Porder, Cfilter))
-    },[dispatch, page, Norder, Porder, Cfilter])
-
-
+        dispatch(getCountries(page, Norder, Porder, Cfilter, Afilter))
+        dispatch(getActivity())
+    },[dispatch, page, Norder, Porder, Cfilter, Afilter])
+ 
     return(
         <>
-        <div>
-            <h1>Countries</h1>
-            <button
+        <div className="navBar">
+            <div className="Htitle">
+                <h1>Countries</h1>  
+            </div>
+            
+                <Link className="link" to="/activiy">
+                    <h3>Create Activity</h3>
+                </Link>
+                <SearchBar />
+        </div>
+        <div >
+            <button className='RenderButton'
             onClick={() => reRender()}>
                 Rerender
             </button>
         </div>
+        <div className="filterContainer">
+           
+        
         <div>
-            <SearchBar/>
-        </div>
-        <div>
-            <Link to="/activiy">
-                <h3>Create Activity</h3>
-            </Link>
-        </div>
-        <div>
-        <h4>filtrar por continente:</h4>
-            <select onChange={(e) => cfilterHandler(e)}>
-                <option value=''>None</option>
+        <h4>Filter by continent:</h4>
+            <select className="Hselect" onChange={(e) => cfilterHandler(e)}>
+                <option value=''>All</option>
                 <option value='Africa'>Africa</option>
                 <option value='Europe'>Europe</option>
                 <option value='Antarctica'>Antarctica</option>
@@ -83,51 +95,71 @@ const Home = () => {
             </select>
         </div>
         <div>
-            <h4>Ordenar por Nombre:</h4>
-            <select onChange={(e) => nOrderHandler(e)}>
-                <option value='ASC'>Asendente</option>
-                <option value='DESC'>Desendente</option>
+       
+        <h4>Filter by activity:</h4>
+            <select className="Hselect" onChange={(e) => afilterHandler(e)}> 
+                    <option value="">All</option>
+                {activities.map( (act) => 
+                    <option value={act.name} key={act.id}>{act.name}</option>
+                )}
+            </select>
+            
+        </div>
+        <div>
+            <h4>Sort by name:</h4>
+            <select className="Hselect" onChange={(e) => nOrderHandler(e)}>
+                <option value='ASC'>A - Z</option>
+                <option value='DESC'>Z - A</option>
             </select>
         </div>
         <div>
-            <h4>Ordenar por cantidad de poblacion:</h4>
-            <select onChange={(e) => pOrderHandler(e)}>
-                <option value='ASC'>Asendente</option>
-                <option value='DESC'>Desendente</option>
+            <h4>Sort by amount of population:</h4>
+            <select className="Hselect" onChange={(e) => pOrderHandler(e)}>
+                <option value='ASC'>Ascending</option>
+                <option value='DESC'>Descending</option>
             </select>
         </div>
-        <div>
-        {country.length > 0 ?
+        </div>
+        <div className="containerContainer">
+        {country.includes("Country not found") ? 
+            <div className="notFound">
+            <h3>County not found</h3>
+            </div>
+             : 
+        country.length > 0 ?
         
         country.map(c => (
-        <div key={c.id}>
-            <Link to={`/countries/${c.id}`}>
-            <div>
-                <img src={`${c.flag}`} alt='flag img'/>
-            </div>
+        <div className="cardContainer" key={c.id}>
+            <Link className="link" to={`/countries/${c.id}`}>
             <div>
                 <h1>{c.name}</h1>
             </div>
             <div>
                 <h3>{c.continet}</h3>
             </div>
+            <div>
+                <img className="flag_img" src={`${c.flag}`} alt='flag img'/>
+            </div>
             </Link>
         </div>
         ))
     : 
             <div>
-                <h3>No de encontro el Pais</h3>
+                <h3>No counties found</h3>
             </div>
-    }
-        <button onClick={()=> next()}
-        disabled={country.length > 10}
-        >Next</button>
-        <button onClick={()=> prev()}
+    } 
+        </div>
+        <div >
+        <button className="prevNext" onClick={()=> prev()}
          disabled={page < 10}
-        >Prev</button>
+        >{"<= Prev"}</button>
+        <button className="prevNext" onClick={()=> next()}
+        disabled={country.length > 10}
+        >{"Next => "}</button>
         </div>
         </>
     )
+
 };
 
 export default Home;
