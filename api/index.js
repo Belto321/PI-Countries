@@ -26,6 +26,7 @@ const getCountries = require('./src/helps/fechapi')
 conn.sync({ force: false }).then(() => {
   //llamar fn externa 
     try{
+      if(Country.length > 0){
   getCountries().then( async res => {
     res.forEach(async e =>{ 
      
@@ -39,9 +40,11 @@ conn.sync({ force: false }).then(() => {
       area: e.area,
       population: e.population
     })
+  
  
-  })
-  })
+    })
+    })
+  }
 }catch(err){
     console.log(err)
   }
