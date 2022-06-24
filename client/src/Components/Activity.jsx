@@ -118,7 +118,7 @@ const country = useSelector( store => store.countries)
       try {
       //   setValues({ ...formValues, countries: addC})
       console.log(formValues)
-        await axios.post('http://localhost:3001/activity', formValues)
+        await axios.post('/activity', formValues)
       } catch (error) {
         console.log(error.message)
       }
