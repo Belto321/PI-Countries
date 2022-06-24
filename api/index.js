@@ -23,7 +23,7 @@ const { Country } = require('./src/db')
 const getCountries = require('./src/helps/fechapi')
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   //llamar fn externa 
     try{
   getCountries().then( async res => {
