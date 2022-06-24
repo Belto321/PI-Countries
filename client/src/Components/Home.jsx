@@ -26,21 +26,17 @@ const Home = () => {
     
 
     const pobSort = () =>{
-        console.log(j)
         j ++;
         if(j % 2 === 0) setPorder("DESC")
         else setPorder("ASC")
         setNorder("")
-        console.log(j)
     }
 
     const nameSort = () =>{
-        console.log(i)
         i ++;
         if(i % 2 === 0) setNorder("DESC")
         else setNorder("ASC")
         setPorder("")
-        console.log(i)
     }
     const prev = ()=> {
         setPage(page - 10)
