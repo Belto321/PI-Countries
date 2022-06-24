@@ -12,7 +12,7 @@ const getCountries = async () => {
     await gottenData.forEach(e => {
       let obj ={};
       obj.id = e.cca3
-         obj.name = e.name.common
+      obj.name = e.name.common
       obj.flag = e.flags[0]
       obj.continet = e.continents[0]
       if(e.capital){
@@ -30,5 +30,7 @@ const getCountries = async () => {
     console.log(err)
 }
   }
+
+  
 
   module.exports = getCountries

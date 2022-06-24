@@ -8,7 +8,7 @@ const SearchBar = () => {
  
 
     const [name, setName] = useState('')
-    const nameSearch = () => {
+    const nameSearch = (e) => {
         dispatch(getNameCountries(name))
     }
     function handleChange(e){
@@ -18,7 +18,7 @@ const SearchBar = () => {
     return (
         <div className='searchBar'>
         
-          <button className="button" onClick={() => nameSearch()}>
+          <button className="button" onClick={(e) => nameSearch(e)}>
               Search Country
           </button>
           <input className="input" type="text" 

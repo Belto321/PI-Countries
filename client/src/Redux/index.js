@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export function getCountries( page, Norder, Porder, Cfilter, Afilter){
     return dispatch => {
-        return axios.get(`http://localhost:3001/countries?page=${page}&Norder=${Norder}&Porder=${Porder}&Cfilter=${Cfilter}&Afilter=${Afilter}`)
+        return axios.get(`/countries?page=${page}&Norder=${Norder}&Porder=${Porder}&Cfilter=${Cfilter}&Afilter=${Afilter}`)
      
             .then(res => dispatch({type: GET_COUNTRIES, payload: res.data}))
             .catch()
@@ -12,7 +12,7 @@ export function getCountries( page, Norder, Porder, Cfilter, Afilter){
 
 export function getNameCountries(name){
     return dispatch => {
-        return axios.get(`http://localhost:3001/countries?name=${name}`)
+        return axios.get(`/countries?name=${name}`)
 
             .then(res => dispatch({type: GET_NAME_COUNTRIES, payload: res.data}))
             .catch()
@@ -21,7 +21,7 @@ export function getNameCountries(name){
 
 export function getCountryDetail(id){
     return dispatch => {
-        return axios.get(`http://localhost:3001/countries/${id}`)
+        return axios.get(`/countries/${id}`)
             .then(res => dispatch({type: GET_COUNTRY_DETAIL, payload: res.data}))
             .catch()
     }
@@ -29,7 +29,7 @@ export function getCountryDetail(id){
 
 export function getActivity(){
     return dispatch => {
-        return axios.get(`http://localhost:3001/activity`)
+        return axios.get(`/activity`)
         .then(res => dispatch({type: GET_ACTIVITY, payload: res.data}))
             .catch()
     }

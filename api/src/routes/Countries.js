@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/', async(req, res)=> {
     const {page, name, Porder, Norder, Cfilter, Afilter} = req.query;
-    
+    let lim = 10
     if(name){
     try{    
         const country = await Country.findOne({
@@ -21,6 +21,7 @@ router.get('/', async(req, res)=> {
     }else{
         if(Norder){
             if(Cfilter && Afilter){
+                if(page === "0") lim = 9
             try{    
                 const countries = await Country.findAll({
                     where:{
@@ -30,7 +31,7 @@ router.get('/', async(req, res)=> {
                         model: Turist_activity,
                         where: { name: Afilter }, 
                       }],
-                    limit: 10,
+                    limit: lim,
                     offset: page,
                     order:[["name", Norder]]
                 })
@@ -43,12 +44,13 @@ router.get('/', async(req, res)=> {
             ////////////////////////////////////////////////////////////////
 
         else if(Cfilter){
+            if(page === "0") lim = 9
             try{
                 const countries = await Country.findAll({
                     where:{
                         continet: Cfilter,
                     },
-                    limit: 10,
+                    limit: lim,
                     offset: page,
                     order:[["name", Norder]]
                 })
@@ -61,13 +63,14 @@ router.get('/', async(req, res)=> {
         ///////////////////////////////////////////////////////////////////
 
         else if(Afilter){
+            if(page === "0") lim = 9
             try {
                 const countries = await Country.findAll({
                     include: [{
                         model: Turist_activity,
                         where: { name: Afilter }, 
                       }],
-                limit: 10,
+                limit: lim,
                 offset: page,
                 order:[["name", Norder]]
                 })
@@ -77,9 +80,11 @@ router.get('/', async(req, res)=> {
                 console.log(err)
             }
         }else{
+            if(page === "0") lim = 9
+
             try {
                 const countries = await Country.findAll({
-                limit: 10,
+                limit: lim,
                 offset: page,
                 order:[["name", Norder]]
                 })
@@ -92,6 +97,7 @@ router.get('/', async(req, res)=> {
 
         } else  if(Porder){
             if(Cfilter && Afilter){
+                if(page === "0") lim = 9
             try{    
                 const countries = await Country.findAll({
                     where:{
@@ -101,7 +107,7 @@ router.get('/', async(req, res)=> {
                         model: Turist_activity,
                         where: { name: Afilter }, 
                       }],
-                    limit: 10,
+                    limit: lim,
                     offset: page,
                     order:[["population", Porder]]
                 })
@@ -114,12 +120,13 @@ router.get('/', async(req, res)=> {
             ////////////////////////////////////////////////////////////////
 
         else if(Cfilter){
+            if(page === "0") lim = 9
             try{
                 const countries = await Country.findAll({
                     where:{
                         continet: Cfilter,
                     },
-                    limit: 10,
+                    limit: lim,
                     offset: page,
                     order:[["population", Porder]]
                 })
@@ -132,13 +139,14 @@ router.get('/', async(req, res)=> {
         ///////////////////////////////////////////////////////////////////
 
         else if(Afilter){
+            if(page === "0") lim = 9
             try {
                 const countries = await Country.findAll({
                     include: [{
                         model: Turist_activity,
                         where: { name: Afilter }, 
                       }],
-                limit: 10,
+                limit: lim,
                 offset: page,
                 order:[["population", Porder]]
                 })
@@ -148,9 +156,10 @@ router.get('/', async(req, res)=> {
                 console.log(err)
             }
         }else{
+            if(page === "0") lim = 9
             try {
                 const countries = await Country.findAll({
-                limit: 10,
+                limit: lim,
                 offset: page,
                 order:[["population", Porder]]
                 })
@@ -174,19 +183,6 @@ router.get('/', async(req, res)=> {
         
 
 
-
-
-// router.get('/', async (req, res) => {
-//     try{
-// const countries = await Country.findAll({})
-// res.json(countries)
-//     }catch(err){
-//         console.log(err)
-//     }
-// })
-
-
-
 router.get('/:code', async (req, res) => {
     const { code } = req.params;
     try {
@@ -198,6 +194,7 @@ router.get('/:code', async (req, res) => {
         console.log(err)
     }
 })
+
 
 
 

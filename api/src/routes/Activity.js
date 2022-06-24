@@ -40,4 +40,16 @@ router.get( '/' ,async (req, res) => {
     }
 })
 
+router.delete('/:id', async (req, res) => {
+    const { id } = req.params
+    try{
+        await Turist_activity.destroy({
+            where: {id : id}
+        })
+        res.send(`se a eliminado la actividad con el ${id} seleccionado`)
+    } catch(err){
+        console.log(err)
+    }
+})
+
 module.exports = router;

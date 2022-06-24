@@ -5,6 +5,8 @@ import SearchBar from "./Serchbar";
 import { Link } from "react-router-dom";
 import './Home.css'
 
+let j = 0
+let i = 1
 
 const Home = () => {
     const country = useSelector( store => store.countries)
@@ -20,7 +22,26 @@ const Home = () => {
     const [Cfilter, setCfilter] = useState("")
 
     const [Afilter, setAfilter] = useState("")
+    
+    
 
+    const pobSort = () =>{
+        console.log(j)
+        j ++;
+        if(j % 2 === 0) setPorder("DESC")
+        else setPorder("ASC")
+        setNorder("")
+        console.log(j)
+    }
+
+    const nameSort = () =>{
+        console.log(i)
+        i ++;
+        if(i % 2 === 0) setNorder("DESC")
+        else setNorder("ASC")
+        setPorder("")
+        console.log(i)
+    }
     const prev = ()=> {
         setPage(page - 10)
     }
@@ -29,17 +50,17 @@ const Home = () => {
         setPage(page + 10)
     }
 
-    const nOrderHandler = (e) => {
-        e.preventDefault();
-        setPorder("")
-        setNorder(e.target.value)
-    }
+    // const nOrderHandler = (e) => {
+    //     e.preventDefault();
+    //     setPorder("")
+    //     setNorder(e.target.value)
+    // }
 
-    const pOrderHandler = (e) => {
-        e.preventDefault();
-        setNorder("")
-        setPorder(e.target.value)
-    }
+    // const pOrderHandler = (e) => {
+    //     e.preventDefault();
+    //     setNorder("")
+    //     setPorder(e.target.value)
+    // }
 
     const cfilterHandler = (e) => {
         e.preventDefault();
@@ -52,7 +73,14 @@ const Home = () => {
     }
 
     const reRender = () => {
-        dispatch(getCountries(page, Norder, Porder, Cfilter, Afilter))
+        setPorder("")
+        setPage(0)
+        setNorder('ASC')
+        setCfilter("")
+        setAfilter("")
+        i = 1
+        j = 0
+        //dispatch(getCountries(page, Norder, Porder, Cfilter, Afilter))
     }
 
     useEffect(()=>{
@@ -77,6 +105,8 @@ const Home = () => {
             onClick={() => reRender()}>
                 Rerender
             </button>
+           
+            
         </div>
         <div className="filterContainer">
            
@@ -107,17 +137,25 @@ const Home = () => {
         </div>
         <div>
             <h4>Sort by name:</h4>
-            <select className="Hselect" onChange={(e) => nOrderHandler(e)}>
+            {/* <select className="Hselect" onChange={(e) => nOrderHandler(e)}>
                 <option value='ASC'>A - Z</option>
                 <option value='DESC'>Z - A</option>
-            </select>
+            </select> */}
+            <button className='RenderButton'
+            onClick={() => nameSort()}>
+                {Norder === "DESC" ? "Z - A" : "A - Z"}
+            </button>
         </div>
         <div>
             <h4>Sort by amount of population:</h4>
-            <select className="Hselect" onChange={(e) => pOrderHandler(e)}>
+            {/* <select className="Hselect" onChange={(e) => pOrderHandler(e)}>
                 <option value='ASC'>Ascending</option>
                 <option value='DESC'>Descending</option>
-            </select>
+            </select> */}
+             <button className='RenderButton'
+            onClick={() => pobSort()}>
+                {Porder === "DESC" ? "Descending" : "Ascending"}
+            </button>
         </div>
         </div>
         <div className="containerContainer">

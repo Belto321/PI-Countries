@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getCountries } from '../Redux';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import './activity.css'
 
@@ -56,7 +57,7 @@ const country = useSelector( store => store.countries)
       const tester = () => {
           if(!name.match(/^[a-zA-Z_ ]*$/)) return false
           else if (difficulty < 0 || difficulty > 5) return false
-          else if(duration.length === 0 || season.length === 0) return false
+          else if(duration.length === 0 || season.length === 0 || countries.length === 0) return false
           else return true
       }
 
@@ -73,26 +74,44 @@ const country = useSelector( store => store.countries)
       }
 
       const addCountry =  (e) => {
-        // let addObj = {
-        //     id: cId = cId + 1,
-        //     value: e.target.value
-        // }
-        // console.log(addObj.id)
-        //  setAddC([...addC, addObj])
-         setValues({...formValues, countries: [...countries, e.target.value]})
-        //  setAddC([...addC, e.target.value])
+        setValues(prevState => {
+          const newState = {
+          ...prevState,
+          countries: [...countries, e.target.value]
+          };
+          setTest(validate(newState))
+          return newState
+          })
+         //setValues({...formValues, countries: [...countries, e.target.value]})
+        
         }
         
     const setSeason = (e) => {
-      setValues({
-            ...formValues,
-            season: e.target.value
+      setValues(prevState => {
+        const newState = {
+        ...prevState,
+        season: e.target.value
+        };
+        setTest(validate(newState))
+        return newState
+            // ...formValues,
+            // season: e.target.value
         })
+
     }
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      if(tester()) postNewActivivty()
+      if(tester()){
+         postNewActivivty()
+         setValues({
+          name: '',
+          difficulty: '',
+          duration: '',
+          season: '',
+          countries: []
+        })
+      }
     }
 
     const postNewActivivty = async() => {
@@ -119,23 +138,24 @@ const country = useSelector( store => store.countries)
       }, [dispatch])
 
       return (
+        <div>
           <form onSubmit={ handleSubmit} className='form'>
         <fieldset>
         <legend>Set your new Activity data:</legend>
         <div className='container'>
         <label>Activty Name:</label>
-        <input type="text" name="name"  value={ name } onChange={ handleChange } required/>
+        <input className='dataEntry' type="text" name="name"  value={ name } onChange={ handleChange } required/>
         <span>{formTest.name || ""}</span>
 
         <label>Difficulty:</label>
-        <input type="number" name="difficulty"  value={ difficulty } onChange={ handleChange } required/>
+        <input placeholder='from 1 to 5' className='dataEntry' type="number" name="difficulty"  value={ difficulty } onChange={ handleChange } required/>
          <span>{formTest.difficulty || ""}</span>
 
         <label>Duration:</label>
-        <input type="number" name="duration"  value={ duration } onChange={ handleChange } required/>
+        <input placeholder='in hrs' className='dataEntry' type="number" name="duration"  value={ duration } onChange={ handleChange } required/>
         <span>{formTest.duration || ""}</span>
         <label>Season:</label>
-        <select onChange={setSeason}>
+        <select className='dataEntry' onChange={setSeason}>
             <option value="">None</option>
             <option value="Summer">Summer</option>
             <option value="Autumn">Autumn</option>
@@ -145,7 +165,7 @@ const country = useSelector( store => store.countries)
         <span>{formTest.season || ""}</span>
 
         <label>Counties where this activity could be practice:</label>
-            <select onChange={ addCountry }>
+            <select className='dataEntry' onChange={ addCountry }>
                 {
                     country.map( c => 
                         <option
@@ -172,6 +192,12 @@ const country = useSelector( store => store.countries)
           </div>
         </fieldset>
         </form>
+           <div>
+              <Link to="/countries">
+                  <h3 className="GoBack">Go Back</h3>
+              </Link>
+          </div>
+       </div>
       )
 }
 

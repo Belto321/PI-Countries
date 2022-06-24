@@ -6,7 +6,13 @@ align-items: center;
 gap: 12px;
 }
 
+.form{
+    margin-top: 3rem;
+}
 
+.dataEntry {
+    background-color:#008bba46;
+}
 
 .addList{
     display: grid;
@@ -48,4 +54,11 @@ span {
     font-weight: 400;
     margin: 8px;
     margin-bottom: 12px;
+}
+
+.GoBack{
+    margin-top: 3rem;
+    text-decoration: none;
+    color: #008CBA;
+    font-weight: 700;
 }
