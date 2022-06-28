@@ -4,6 +4,7 @@ import {getCountries, getActivity} from '../Redux/index.js'
 import SearchBar from "./Serchbar";
 import { Link } from "react-router-dom";
 import './Home.css'
+import Loading  from './Loading'
 
 let j = 0
 let i = 1
@@ -156,8 +157,8 @@ const Home = () => {
         </div>
         <div className="containerContainer">
         {country.includes("Country not found") ? 
-            <div className="notFound">
-            <h3>County not found</h3>
+            <div>
+            <Loading/>
             </div>
              : 
         country.length > 0 ?
