@@ -1,31 +1,61 @@
 .DetailContainer {
-    /* display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 2rem;
-    margin-top: 1rem; */
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
 .h3Data{
     margin-top: 12px;
+    margin-left: 28px;
     text-align: left;
 }
 
 .CoutryName{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     margin-top: 2.5rem;
 }
 
 .GoBack{
+    background-color: #0054ba;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+    text-align: center;
     text-decoration: none;
-    color: rgb(0, 21, 255);
-    font-weight: 700;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400;
+    margin: 8px;
+    margin-bottom: 12px;
 }
 
+
 .CDimg{
-    width: 45rem;
-    height: 30rem;
+    width: 35rem;
     margin-top: 2rem;
     margin-bottom: 1rem;
+}
+
+.cardDetailCont{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 40px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: rgba(13, 146, 195, 0.85);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    max-width: 1000px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 8px 8px 0 rgba(112, 200, 235, 0.2), 0 6px 10px 0 rgba(112, 200, 235, 0.2);
 }

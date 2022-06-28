@@ -138,10 +138,16 @@ const country = useSelector( store => store.countries)
       }, [dispatch])
 
       return (
-        <div>
+        <div className='formbox'>
+            <div>
+              <Link to="/countries">
+                <div className='backConatiner'>
+              <button className="GoBackA">Go Back</button>
+              </div>
+              </Link>
+          </div>
           <form onSubmit={ handleSubmit} className='form'>
-        <fieldset>
-        <legend>Set your new Activity data:</legend>
+        <h3>Set your new Activity data:</h3>
         <div className='container'>
         <label>Activty Name:</label>
         <input className='dataEntry' type="text" name="name"  value={ name } onChange={ handleChange } required/>
@@ -190,13 +196,7 @@ const country = useSelector( store => store.countries)
           </div>
           <button className='submit' type="submit">Create</button>
           </div>
-        </fieldset>
         </form>
-           <div>
-              <Link to="/countries">
-                  <h3 className="GoBack">Go Back</h3>
-              </Link>
-          </div>
        </div>
       )
 }

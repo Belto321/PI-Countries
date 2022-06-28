@@ -86,3 +86,18 @@ text-align: center;
     margin-left: 14.5rem;
     margin-bottom: 4rem;
 }
+
+.createActivitybut{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400;
+    margin: 8px;
+    margin-bottom: 12px; 
+}

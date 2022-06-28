@@ -1,4 +1,4 @@
-import { GET_COUNTRIES, GET_COUNTRY_DETAIL, GET_ACTIVITY, GET_NAME_COUNTRIES } from './ActionsTypes';
+import { GET_COUNTRIES, GET_COUNTRY_DETAIL, GET_ACTIVITY, GET_NAME_COUNTRIES, GET_CLEAN } from './ActionsTypes';
 import axios from 'axios'
 
 export function getCountries( page, Norder, Porder, Cfilter, Afilter){
@@ -33,4 +33,10 @@ export function getActivity(){
         .then(res => dispatch({type: GET_ACTIVITY, payload: res.data}))
             .catch()
     }
+};
+
+export function getClean(){
+        return (
+            {type:GET_CLEAN}
+        )
 }

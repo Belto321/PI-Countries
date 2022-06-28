@@ -47,18 +47,6 @@ const Home = () => {
         setPage(page + 10)
     }
 
-    // const nOrderHandler = (e) => {
-    //     e.preventDefault();
-    //     setPorder("")
-    //     setNorder(e.target.value)
-    // }
-
-    // const pOrderHandler = (e) => {
-    //     e.preventDefault();
-    //     setNorder("")
-    //     setPorder(e.target.value)
-    // }
-
     const cfilterHandler = (e) => {
         e.preventDefault();
         setCfilter(e.target.value)
@@ -77,7 +65,6 @@ const Home = () => {
         setAfilter("")
         i = 1
         j = 0
-        //dispatch(getCountries(page, Norder, Porder, Cfilter, Afilter))
     }
 
     useEffect(()=>{
@@ -85,6 +72,7 @@ const Home = () => {
         dispatch(getActivity())
     },[dispatch, page, Norder, Porder, Cfilter, Afilter])
  
+    if(country.length === 0) return(<Loading></Loading>)
     return(
         <>
         <div className="navBar">
@@ -93,7 +81,7 @@ const Home = () => {
             </div>
             
                 <Link className="link" to="/activiy">
-                    <h3>Create Activity</h3>
+                    <button className="createActivitybut">Create Activity</button>
                 </Link>
                 <SearchBar />
         </div>
@@ -134,10 +122,6 @@ const Home = () => {
         </div>
         <div>
             <h4>Sort by name:</h4>
-            {/* <select className="Hselect" onChange={(e) => nOrderHandler(e)}>
-                <option value='ASC'>A - Z</option>
-                <option value='DESC'>Z - A</option>
-            </select> */}
             <button className='RenderButton'
             onClick={() => nameSort()}>
                 {Norder === "DESC" ? "Z - A" : "A - Z"}
@@ -145,23 +129,18 @@ const Home = () => {
         </div>
         <div>
             <h4>Sort by amount of population:</h4>
-            {/* <select className="Hselect" onChange={(e) => pOrderHandler(e)}>
-                <option value='ASC'>Ascending</option>
-                <option value='DESC'>Descending</option>
-            </select> */}
              <button className='RenderButton'
             onClick={() => pobSort()}>
                 {Porder === "DESC" ? "Descending" : "Ascending"}
             </button>
         </div>
         </div>
-        <div className="containerContainer">
+       <div className="containerContainer">  
         {country.includes("Country not found") ? 
             <div>
-            <Loading/>
+                <h3>No counties found</h3>
             </div>
-             : 
-        country.length > 0 ?
+             :
         
         country.map(c => (
         <div className="cardContainer" key={c.id}>
@@ -178,10 +157,6 @@ const Home = () => {
             </Link>
         </div>
         ))
-    : 
-            <div>
-                <h3>No counties found</h3>
-            </div>
     } 
         </div>
         <div >

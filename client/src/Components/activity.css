@@ -11,7 +11,7 @@ gap: 12px;
 }
 
 .dataEntry {
-    background-color:#008bba46;
+    background-color:white;
 }
 
 .addList{
@@ -55,10 +55,36 @@ span {
     margin: 8px;
     margin-bottom: 12px;
 }
+.backConatiner{
+    display: flex;
+    align-content: flex-start;
+  
+}
+.GoBackA{
+    background-color: #0054ba;
+    border: none;
+    color: white;
+    padding: 8px 13px;
+    font-size: 14px;
+    border-radius: 8px;
+    font-weight: 400;
+    margin: 8px;
+}
 
-.GoBack{
-    margin-top: 3rem;
-    text-decoration: none;
-    color: #008CBA;
-    font-weight: 700;
+.formbox{
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: rgba(13, 146, 195, 0.85);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    max-width: 1000px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 8px 8px 0 rgba(112, 200, 235, 0.2), 0 6px 10px 0 rgba(112, 200, 235, 0.2);
 }
